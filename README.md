@@ -16,8 +16,8 @@ Verify BGP operation, troubleshoot routing issues, and apply optimizations such 
 
 On Router R3, I entered global configuration mode and started the BGP process:
 
-router bgp 65001
-bgp router-id 3.3.3.3
+- router bgp 65001
+- bgp router-id 3.3.3.3
 
 The router ID is not tied to an interface; it’s simply a unique identifier (similar to OSPF).
 
@@ -27,17 +27,15 @@ I configured R3 to peer with three routers:
 
 R2 (iBGP peer)
 
-neighbor 10.1.1.2 remote-as 65001
-
+- neighbor 10.1.1.2 remote-as 65001
 
 ISP1 (eBGP peer)
 
-neighbor 198.51.100.2 remote-as 65002
-
+- neighbor 198.51.100.2 remote-as 65002
 
 ISP2 (eBGP peer)
 
-neighbor 198.51.100.6 remote-as 65004
+- neighbor 198.51.100.6 remote-as 65004
 
 
 This successfully established BGP adjacencies with R2, ISP1, and ISP2.
@@ -46,7 +44,7 @@ This successfully established BGP adjacencies with R2, ISP1, and ISP2.
 
 Only the 10.1.1.0/24 network (link between R2 and R3) should be advertised.
 
-network 10.1.1.0 mask 255.255.255.0
+- network 10.1.1.0 mask 255.255.255.0
 
 
 This avoids making R3 a transit path between ISPs.
@@ -71,7 +69,7 @@ Root cause: R2 did not know how to reach the next hop (198.51.100.2).
 
 Fix: On R3, I used next-hop-self when advertising routes to R2:
 
-neighbor 10.1.1.2 next-hop-self
+- neighbor 10.1.1.2 next-hop-self
 <img width="750" height="88" alt="image" src="https://github.com/user-attachments/assets/9da1ae83-3eb4-49f4-9341-c0a67d3fc8a0" />
 
 
@@ -84,9 +82,10 @@ R1 could not reach external networks because iBGP by default does not re-adverti
 
 Solution: Configure R2 as a route reflector with R1 and R3 as clients:
 
-router bgp 65001
- neighbor 172.16.1.1 route-reflector-client   ! R1
- neighbor 10.1.1.1 route-reflector-client    ! R3
+ - router bgp 65001
+ - neighbor 172.16.1.1 route-reflector-client   ! R1
+ - neighbor 10.1.1.1 route-reflector-client    ! R3
+<img width="826" height="169" alt="image" src="https://github.com/user-attachments/assets/d1a4cae9-291a-43e1-b1bb-f9242b5440dd" />
 
 
 Now R1 also learned routes to the Internet.
@@ -96,10 +95,10 @@ Now R1 also learned routes to the Internet.
 
 To simplify configuration and reduce CPU load, I created a peer group for ISP neighbors. A prefix-list was applied to filter RFC1918 private addresses.
 
-neighbor BGP-PG peer-group
-neighbor BGP-PG prefix-list BGP-DEMO in
-neighbor 198.51.100.2 peer-group BGP-PG
-neighbor 198.51.100.6 peer-group BGP-PG
+- neighbor BGP-PG peer-group
+- neighbor BGP-PG prefix-list BGP-DEMO in
+- neighbor 198.51.100.2 peer-group BGP-PG
+- neighbor 198.51.100.6 peer-group BGP-PG
 
 
 This ensured both ISPs shared the same inbound filtering policy.
