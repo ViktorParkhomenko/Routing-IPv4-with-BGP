@@ -76,6 +76,7 @@ neighbor 10.1.1.2 next-hop-self
 
 
 After clearing BGP (clear ip bgp *), R2 correctly used R3 (10.1.1.1) as the next hop and could reach 5.5.5.5.
+<img width="877" height="157" alt="image" src="https://github.com/user-attachments/assets/14eec8b7-e08c-4cc4-98a4-f84632f2ecaf" />
 
 ## Step 6 – Route Reflector
 
