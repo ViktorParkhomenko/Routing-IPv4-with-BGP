@@ -91,7 +91,7 @@ Solution: Configure R2 as a route reflector with R1 and R3 as clients:
 Now R1 also learned routes to the Internet.
 <img width="910" height="135" alt="image" src="https://github.com/user-attachments/assets/ba595e1a-e931-4744-9d2f-f22b826a6cb9" />
 
-## Step 7 – Peer Groups
+### Step 7 – Peer Groups
 
 To simplify configuration and reduce CPU load, I created a peer group for ISP neighbors. A prefix-list was applied to filter RFC1918 private addresses.
 
@@ -114,10 +114,6 @@ R3 successfully established iBGP and eBGP peerings.
 Routing was corrected with next-hop-self and route reflector configuration.
 
 Peer groups were demonstrated for scalability and policy consistency.
-
-Next Steps
-
-The next phase of the project will focus on path selection optimization, ensuring traffic prefers the higher-bandwidth ISP2 link instead of ISP1.
 
 ✅ Result: Successfully configured and verified BGP on Router R3, established neighbor relationships, and implemented fixes for next-hop and route reflection issues.
 
