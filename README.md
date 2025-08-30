@@ -78,7 +78,7 @@ neighbor 10.1.1.2 next-hop-self
 After clearing BGP (clear ip bgp *), R2 correctly used R3 (10.1.1.1) as the next hop and could reach 5.5.5.5.
 <img width="877" height="157" alt="image" src="https://github.com/user-attachments/assets/14eec8b7-e08c-4cc4-98a4-f84632f2ecaf" />
 
-## Step 6 – Route Reflector
+### Step 6 – Route Reflector
 
 R1 could not reach external networks because iBGP by default does not re-advertise routes learned from another iBGP peer.
 
@@ -90,6 +90,7 @@ router bgp 65001
 
 
 Now R1 also learned routes to the Internet.
+<img width="910" height="135" alt="image" src="https://github.com/user-attachments/assets/ba595e1a-e931-4744-9d2f-f22b826a6cb9" />
 
 ## Step 7 – Peer Groups
 
