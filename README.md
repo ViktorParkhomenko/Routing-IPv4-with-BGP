@@ -65,12 +65,14 @@ Initially, R3 preferred the slower 10 Mbps ISP1 link instead of the faster 100 M
 ## Step 5 – Troubleshooting Next-Hop Issues
 
 R2 learned about 5.5.5.0/24, but pings to 5.5.5.5 failed.
+<img width="1035" height="470" alt="image" src="https://github.com/user-attachments/assets/3ae0ff42-7fac-4e32-9b44-c49e99b0a5ce" />
 
 Root cause: R2 did not know how to reach the next hop (198.51.100.2).
 
 Fix: On R3, I used next-hop-self when advertising routes to R2:
 
 neighbor 10.1.1.2 next-hop-self
+<img width="750" height="88" alt="image" src="https://github.com/user-attachments/assets/9da1ae83-3eb4-49f4-9341-c0a67d3fc8a0" />
 
 
 After clearing BGP (clear ip bgp *), R2 correctly used R3 (10.1.1.1) as the next hop and could reach 5.5.5.5.
